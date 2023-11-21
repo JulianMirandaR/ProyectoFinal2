@@ -41,6 +41,7 @@ namespace ProyectoFinal2
             timer1.Start();
             timer2.Start();
             ConfigurarDataGridView();
+            btnEliminar.Click += btnEliminar_Click;
         }
 
         private void FrmTransaccion_Load(object sender, EventArgs e)
@@ -67,7 +68,6 @@ namespace ProyectoFinal2
             }
             return detalle;
         }
-
         private void ConfigurarDataGridView()
         {
             dataGridView1.Columns.Add("ArticuloId", "Articulo ID");
@@ -75,6 +75,8 @@ namespace ProyectoFinal2
             dataGridView1.Columns.Add("Cantidad", "Cantidad");
             dataGridView1.Columns.Add("PrecioUnitario", "Precio Unitario");
             dataGridView1.Columns.Add("PrecioTotal", "Precio Total");
+
+            dataGridView1.CellClick += dataGridView1_CellClick;
         }
 
         private void CargarArticulosEnComboBox()
@@ -85,42 +87,17 @@ namespace ProyectoFinal2
             if (resultado.IsValid)
             {
                 cmbArticulo.DataSource = resultado.Articulos;
-                cmbArticulo.DisplayMember = "Detalle"; 
+                cmbArticulo.DisplayMember = "Detalle";
             }
             else
             {
                 MessageBox.Show("Error al cargar la lista de artículos: " + resultado.Error);
             }
         }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
-        {
-            // Verificar si se selecciono el articulo
-            if (articuloSeleccionado == null)
-            {
-                MessageBox.Show("Selecciona un artículo antes de agregarlo.");
-                return;
-            }
-
-            // Añade el artículo a la lista de venta
-            int cantidad = Convert.ToInt32(txtCantidad.Text);
-            decimal precioTotal = cantidad * articuloSeleccionado.Precio_venta;
-
-            DataGridViewRow fila = new DataGridViewRow();
-            fila.CreateCells(dataGridView1, articuloSeleccionado.Articuloid, articuloSeleccionado.Detalle, cantidad, articuloSeleccionado.Precio_venta, precioTotal);
-            dataGridView1.Rows.Add(fila);
-
-
-            CalcularPrecioTotal();
-
-            
-            LimpiarControles();// Limpia los controles para el próximo artículo
-        }
-
+        
         private void CalcularPrecioTotal()
         {
-            
-
+            total = 0;
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
                 total += Convert.ToDecimal(fila.Cells["PrecioTotal"].Value);
@@ -128,32 +105,26 @@ namespace ProyectoFinal2
             lblTotal.Text = "TOTAL: ";
             lblTotal.Text += total.ToString("C");
         }
-
         private void LimpiarControles()
         {
             cmbArticulo.SelectedIndex = -1;
             articuloSeleccionado = null;
+            txtCodigo.Text = "";
             lblPrecio.Text = "";
             lblPresentacion.Text = "";
             txtCantidad.Text = "1";
             pictureBox1.Image = null;
         }
-
-
         private void btnFinalizarVenta_Click(object sender, EventArgs e)
         {
-
-
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
                 long articuloId = Convert.ToInt64(fila.Cells["ArticuloId"].Value);
                 int cantidad = Convert.ToInt32(fila.Cells["Cantidad"].Value);
                 var resultado = ArticuloController.GetArticulo(articuloId);
-
                 if (resultado.IsValid)
                 {
                     Articulo articulo = resultado.Articulo;
-
                 }
                 else
                 {
@@ -164,12 +135,8 @@ namespace ProyectoFinal2
             listaArticulos.Clear();
             dataGridView1.Rows.Clear();
             CalcularPrecioTotal();
-
             MessageBox.Show("Venta finalizada y guardada en la base de datos.");
         }
-
-
-
         private void cmbArticulo_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (cmbArticulo.SelectedIndex != -1)
@@ -179,6 +146,7 @@ namespace ProyectoFinal2
                 lblPresentacion.Text = "Presentacion: ";
                 lblPrecio.Text += articuloSeleccionado.Precio_venta.ToString("C");
                 lblPresentacion.Text += articuloSeleccionado.Presentacion;
+                txtCodigo.Text = articuloSeleccionado.Articuloid.ToString();
             }
         }
 
@@ -186,8 +154,6 @@ namespace ProyectoFinal2
         {
 
             long codigoBarras = 2342; // Simulación de lectura de código de barras y luego se reeemplaza esto con el valor real 
-
-
             foreach (Articulo articulo in cmbArticulo.Items)// Busca el artículo correspondiente en la lista
             {
                 if (articulo.Articuloid == codigoBarras)
@@ -200,7 +166,7 @@ namespace ProyectoFinal2
 
         private void btnAgregar_Click_1(object sender, EventArgs e)
         {
-            
+
             if (articuloSeleccionado == null)// Verifica si se ha seleccionado un artículo
             {
                 MessageBox.Show("Selecciona un artículo antes de agregarlo.");
@@ -210,19 +176,12 @@ namespace ProyectoFinal2
             // Añade el artículo a la lista de venta
             int cantidad = Convert.ToInt32(txtCantidad.Text);
             decimal precioTotal = cantidad * articuloSeleccionado.Precio_venta;
-
             DataGridViewRow fila = new DataGridViewRow();
             fila.CreateCells(dataGridView1, articuloSeleccionado.Articuloid, articuloSeleccionado.Detalle, cantidad, articuloSeleccionado.Precio_venta, precioTotal);
             dataGridView1.Rows.Add(fila);
-
-            
             CalcularPrecioTotal();// Calcula y muestra el precio total
-
-            
             LimpiarControles();// Limpia los controles para el próximo artículo
         }
-
-        
 
         private void CargarArticulos()
         {
@@ -246,9 +205,7 @@ namespace ProyectoFinal2
                 resultado = Reader.Decode((Bitmap)pictureBox1.Image);
                 if (resultado != null)
                 {
-                    
                     txtCodigo.Text = resultado.Text;// Asigna el código de barras al TextBox
-
                     foreach (Articulo articulo in cmbArticulo.Items)
                     {
                         if (articulo.Articuloid == long.Parse(resultado.Text))
@@ -272,13 +229,13 @@ namespace ProyectoFinal2
         private void btnImprimir_Click(object sender, EventArgs e)
         {
             var fecha = DateTime.Now.ToString("dd/MM/yyyy");
-            decimal total = 0;
+            decimal totalGeneral = 0;
+            QuestPDF.Settings.License = LicenseType.Community;
 
             var document = Document.Create(container =>
             {
                 container.Page(page =>
                 {
-
                     page.Content().Column(col =>
                     {
                         col.Item().Text(text =>
@@ -298,7 +255,6 @@ namespace ProyectoFinal2
                                 columns.RelativeColumn();
                                 columns.RelativeColumn();
                             });
-
                             tabla.Header(header =>
                             {
                                 header.Cell().Background("#CC90FF").Padding(2).AlignCenter().Text("CANTIDAD").FontSize(11).FontColor("000000");
@@ -307,28 +263,29 @@ namespace ProyectoFinal2
                                 header.Cell().Background("#CC90FF").Padding(2).AlignRight().Text("SUBTOTAL").FontSize(11).FontColor("000000");
                             });
 
-                            decimal subtotal = 0;
                             foreach (DataGridViewRow fila in dataGridView1.Rows)
                             {
-                                string cantidad = fila.Cells["Cantidad"].Value.ToString();
-                                string descripcion = fila.Cells["Detalle"].Value.ToString();
-                                string precio = fila.Cells["PrecioUnitario"].Value.ToString();
+                                if (fila.Cells["Cantidad"].Value != null && fila.Cells["Detalle"].Value != null && fila.Cells["PrecioUnitario"].Value != null)
+                                {
+                                    string cantidad = fila.Cells["Cantidad"].Value.ToString();
+                                    string descripcion = fila.Cells["Detalle"].Value.ToString();
+                                    string precio = fila.Cells["PrecioUnitario"].Value.ToString();
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(cantidad).FontSize(10);
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(descripcion).FontSize(10);
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(precio).FontSize(10);
 
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(cantidad).FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(descripcion).FontSize(10);
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignCenter().Text(precio).FontSize(10);
+                                    decimal subtotal = Convert.ToDecimal(precio) * Convert.ToDecimal(cantidad);
+                                    totalGeneral += subtotal;
 
-                                subtotal = Convert.ToDecimal(precio) * Convert.ToDecimal(cantidad);
-                                total += subtotal;
-
-                                tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text(subtotal.ToString("C")).FontSize(10);
+                                    tabla.Cell().BorderBottom(0.5f).BorderColor("#D9D9D9").Padding(2).AlignRight().Text(subtotal.ToString("C")).FontSize(10);
+                                }
                             }
                         });
 
                         col.Item().Padding(2).AlignRight().Text(text =>
                         {
                             text.Span("TOTAL: $").FontSize(11).SemiBold();
-                            text.Span(total.ToString()).FontSize(11);
+                            text.Span(totalGeneral.ToString()).FontSize(11);
                         });
                     });
                 });
@@ -336,7 +293,7 @@ namespace ProyectoFinal2
 
             try
             {
-                document.GeneratePdf(@"C: \Users\juuli\Desktop\ProyectoFinal2\ticket.pdf");
+                document.GeneratePdf(@"C:\Users\juuli\Desktop\ProyectoFinal2\ticket.pdf");
                 MessageBox.Show("El ticket se imprimió correctamente");
             }
             catch (Exception ex)
@@ -347,19 +304,18 @@ namespace ProyectoFinal2
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-     
+
             Venta nuevaVenta = new Venta// Crear un objeto Venta con los datos de la venta actual
             {
                 VentaID = 1,
                 Monto = total,
                 Fecha = DateTime.Now.Date,
                 Hora = DateTime.Now.TimeOfDay,
-                UsuarioID = obtenerIdUsuarioActivo() 
+                UsuarioID = obtenerIdUsuarioActivo()
             };
 
             if (VentaController.AgregarVenta(nuevaVenta))
             {
-                
                 listaArticulos.Clear();// Limpia la lista de artículos vendidos y el DataGridView después de guardar la venta
                 dataGridView1.Rows.Clear();
                 CalcularPrecioTotal();
@@ -373,9 +329,55 @@ namespace ProyectoFinal2
         }
         private int obtenerIdUsuarioActivo()
         {
-
             return UsuarioActual.UsuarioID;
         }
+
+        private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                
+                long articuloId = Convert.ToInt64(row.Cells["ArticuloId"].Value);// Se puede almacenar el ArticuloId en una variable para su posterior eliminación
+            }
+        }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            if (dataGridView1.SelectedRows.Count >= 0)
+            {
+                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
+                {
+                   decimal cantidad = Convert.ToDecimal(row.Cells["Cantidad"].Value);
+                   decimal precioUnitario = Convert.ToDecimal(row.Cells["PrecioUnitario"].Value);
+                   decimal subtotalArticulo = cantidad * precioUnitario;
+                   total -= subtotalArticulo;
+                    // O simplemente puedes eliminar la fila directamente
+                    if (!row.IsNewRow)
+                    {
+                        dataGridView1.Rows.Remove(row);
+                    }
+                }
+
+                // Reinicia el valor de total antes de recalcularlo
+                total = 0;
+                foreach (DataGridViewRow fila in dataGridView1.Rows)
+                {
+                    if (fila.Cells["Cantidad"].Value != null && fila.Cells["PrecioUnitario"].Value != null)
+                    {
+                        decimal cantidad = Convert.ToDecimal(fila.Cells["Cantidad"].Value);
+                        decimal precioUnitario = Convert.ToDecimal(fila.Cells["PrecioUnitario"].Value);
+                        total += cantidad * precioUnitario;
+                    }
+                }
+
+                // Actualiza el total en la interfaz
+                lblTotal.Text = "TOTAL: " + total.ToString("C");
+            }
+            else
+            {
+                MessageBox.Show("Selecciona una fila para eliminar.");
+            }
+        }
     }
-    
 }

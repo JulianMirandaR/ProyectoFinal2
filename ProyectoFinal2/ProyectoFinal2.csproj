@@ -129,116 +129,115 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ArticuloController.cs" />
-    <Compile Include="ArticuloLibrary.cs" />
-    <Compile Include="Articulos.cs" />
-    <Compile Include="FormAgregarProveedor.cs">
+    <Compile Include="Articulos\ArticuloController.cs" />
+    <Compile Include="Articulos\ArticuloLibrary.cs" />
+    <Compile Include="Articulos\Articulos.cs" />
+    <Compile Include="Proveedor\FormAgregarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAgregarProveedor.Designer.cs">
+    <Compile Include="Proveedor\FormAgregarProveedor.Designer.cs">
       <DependentUpon>FormAgregarProveedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormArt.cs" />
-    <Compile Include="FormEliminarProveedor.cs">
+    <Compile Include="Proveedor\FormEliminarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormEliminarProveedor.Designer.cs">
+    <Compile Include="Proveedor\FormEliminarProveedor.Designer.cs">
       <DependentUpon>FormEliminarProveedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormListaProveedores.cs">
+    <Compile Include="Proveedor\FormListaProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormListaProveedores.Designer.cs">
+    <Compile Include="Proveedor\FormListaProveedores.Designer.cs">
       <DependentUpon>FormListaProveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormModificarProveedor.cs">
+    <Compile Include="Proveedor\FormModificarProveedor.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormModificarProveedor.Designer.cs">
+    <Compile Include="Proveedor\FormModificarProveedor.Designer.cs">
       <DependentUpon>FormModificarProveedor.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAgregarArticulo.cs">
+    <Compile Include="Articulos\FrmAgregarArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAgregarArticulo.Designer.cs">
+    <Compile Include="Articulos\FrmAgregarArticulo.Designer.cs">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmArticulos.cs">
+    <Compile Include="Articulos\FrmArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmArticulos.Designer.cs">
+    <Compile Include="Articulos\FrmArticulos.Designer.cs">
       <DependentUpon>FrmArticulos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAgregarUsuario.cs">
+    <Compile Include="Articulos\FrmAgregarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAgregarUsuario.Designer.cs">
+    <Compile Include="Articulos\FrmAgregarUsuario.Designer.cs">
       <DependentUpon>FrmAgregarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEliminarUsuario.cs">
+    <Compile Include="Usuario\FrmEliminarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEliminarUsuario.Designer.cs">
+    <Compile Include="Usuario\FrmEliminarUsuario.Designer.cs">
       <DependentUpon>FrmEliminarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmModificarUsuario.cs">
+    <Compile Include="Usuario\FrmModificarUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmModificarUsuario.Designer.cs">
+    <Compile Include="Usuario\FrmModificarUsuario.Designer.cs">
       <DependentUpon>FrmModificarUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmUsuarios.cs">
+    <Compile Include="Usuario\FrmUsuarios.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmUsuarios.Designer.cs">
+    <Compile Include="Usuario\FrmUsuarios.Designer.cs">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmVentas.cs">
+    <Compile Include="Venta\FrmVentas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmVentas.Designer.cs">
+    <Compile Include="Venta\FrmVentas.Designer.cs">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </Compile>
-    <Compile Include="InicioAdministrador.cs">
+    <Compile Include="Sesion\InicioAdministrador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioAdministrador.Designer.cs">
+    <Compile Include="Sesion\InicioAdministrador.Designer.cs">
       <DependentUpon>InicioAdministrador.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmEliminarArticulo.cs">
+    <Compile Include="Articulos\FrmEliminarArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmEliminarArticulo.Designer.cs">
+    <Compile Include="Articulos\FrmEliminarArticulo.Designer.cs">
       <DependentUpon>FrmEliminarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmListaArticulos.cs">
+    <Compile Include="Articulos\FrmListaArticulos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmListaArticulos.Designer.cs">
+    <Compile Include="Articulos\FrmListaArticulos.Designer.cs">
       <DependentUpon>FrmListaArticulos.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmLogin.cs">
+    <Compile Include="Sesion\FrmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmLogin.Designer.cs">
+    <Compile Include="Sesion\FrmLogin.Designer.cs">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmModificarArticulo.cs">
+    <Compile Include="Articulos\FrmModificarArticulo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmModificarArticulo.Designer.cs">
+    <Compile Include="Articulos\FrmModificarArticulo.Designer.cs">
       <DependentUpon>FrmModificarArticulo.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormProveedores.cs">
+    <Compile Include="Proveedor\FormProveedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormProveedores.Designer.cs">
+    <Compile Include="Proveedor\FormProveedores.Designer.cs">
       <DependentUpon>FormProveedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmTransaccion.cs">
+    <Compile Include="Venta\FrmTransaccion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmTransaccion.Designer.cs">
+    <Compile Include="Venta\FrmTransaccion.Designer.cs">
       <DependentUpon>FrmTransaccion.cs</DependentUpon>
     </Compile>
     <Compile Include="FrmVigilancia.cs">
@@ -247,17 +246,17 @@
     <Compile Include="FrmVigilancia.Designer.cs">
       <DependentUpon>FrmVigilancia.cs</DependentUpon>
     </Compile>
-    <Compile Include="InicioOperador.cs">
+    <Compile Include="Sesion\InicioOperador.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InicioOperador.Designer.cs">
+    <Compile Include="Sesion\InicioOperador.Designer.cs">
       <DependentUpon>InicioOperador.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Proveedor.cs" />
-    <Compile Include="ProveedorController.cs" />
-    <Compile Include="Sesion.cs" />
+    <Compile Include="Proveedor\Proveedor.cs" />
+    <Compile Include="Proveedor\ProveedorController.cs" />
+    <Compile Include="Sesion\Sesion.cs" />
     <Compile Include="UserConfig.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -266,66 +265,66 @@
     </Compile>
     <Compile Include="UtilsLibrary.cs" />
     <Compile Include="ValidarLibrary.cs" />
-    <Compile Include="Venta.cs" />
-    <Compile Include="VentaController.cs" />
-    <EmbeddedResource Include="FormAgregarProveedor.resx">
+    <Compile Include="Venta\Venta.cs" />
+    <Compile Include="Venta\VentaController.cs" />
+    <EmbeddedResource Include="Proveedor\FormAgregarProveedor.resx">
       <DependentUpon>FormAgregarProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormEliminarProveedor.resx">
+    <EmbeddedResource Include="Proveedor\FormEliminarProveedor.resx">
       <DependentUpon>FormEliminarProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormListaProveedores.resx">
+    <EmbeddedResource Include="Proveedor\FormListaProveedores.resx">
       <DependentUpon>FormListaProveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormModificarProveedor.resx">
+    <EmbeddedResource Include="Proveedor\FormModificarProveedor.resx">
       <DependentUpon>FormModificarProveedor.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAgregarArticulo.resx">
+    <EmbeddedResource Include="Articulos\FrmAgregarArticulo.resx">
       <DependentUpon>FrmAgregarArticulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmArticulos.resx">
+    <EmbeddedResource Include="Articulos\FrmArticulos.resx">
       <DependentUpon>FrmArticulos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAgregarUsuario.resx">
+    <EmbeddedResource Include="Articulos\FrmAgregarUsuario.resx">
       <DependentUpon>FrmAgregarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEliminarUsuario.resx">
+    <EmbeddedResource Include="Usuario\FrmEliminarUsuario.resx">
       <DependentUpon>FrmEliminarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmModificarUsuario.resx">
+    <EmbeddedResource Include="Usuario\FrmModificarUsuario.resx">
       <DependentUpon>FrmModificarUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmUsuarios.resx">
+    <EmbeddedResource Include="Usuario\FrmUsuarios.resx">
       <DependentUpon>FrmUsuarios.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmVentas.resx">
+    <EmbeddedResource Include="Venta\FrmVentas.resx">
       <DependentUpon>FrmVentas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioAdministrador.resx">
+    <EmbeddedResource Include="Sesion\InicioAdministrador.resx">
       <DependentUpon>InicioAdministrador.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmEliminarArticulo.resx">
+    <EmbeddedResource Include="Articulos\FrmEliminarArticulo.resx">
       <DependentUpon>FrmEliminarArticulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmListaArticulos.resx">
+    <EmbeddedResource Include="Articulos\FrmListaArticulos.resx">
       <DependentUpon>FrmListaArticulos.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmLogin.resx">
+    <EmbeddedResource Include="Sesion\FrmLogin.resx">
       <DependentUpon>FrmLogin.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmModificarArticulo.resx">
+    <EmbeddedResource Include="Articulos\FrmModificarArticulo.resx">
       <DependentUpon>FrmModificarArticulo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormProveedores.resx">
+    <EmbeddedResource Include="Proveedor\FormProveedores.resx">
       <DependentUpon>FormProveedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmTransaccion.resx">
+    <EmbeddedResource Include="Venta\FrmTransaccion.resx">
       <DependentUpon>FrmTransaccion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmVigilancia.resx">
       <DependentUpon>FrmVigilancia.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InicioOperador.resx">
+    <EmbeddedResource Include="Sesion\InicioOperador.resx">
       <DependentUpon>InicioOperador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -355,9 +354,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Articulos\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Resources\iconoUsuario.png" />
   </ItemGroup>
