@@ -24,17 +24,13 @@ namespace ProyectoFinal2
             public static int UsuarioID { get; set; }
         }
 
-        
-        
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             int usuarioid = int.Parse(txtUsuario.Text);
             string contraseña = txtContraseña.Text;
-
             if (ValidarCredenciales(usuarioid, contraseña))
             {
                 string tipoAcceso = ObtenerTipoAcceso(usuarioid); //obtiene el tipo de acceso del usuario
-
                 MessageBox.Show("Inicio de sesión exitoso");
                 Sesion nuevaSesion = new Sesion
                 {
@@ -43,26 +39,19 @@ namespace ProyectoFinal2
                     Fecha = DateTime.Now.Date,
                     HoraInicio = DateTime.Now.TimeOfDay
                 };
-
-                
                 GuardarSesion(nuevaSesion);// Guarda la sesión en la base de datos
-
                 if (tipoAcceso == "Administrador")// Se la ventana correspondiente según el tipo de acceso
-                {
-                    
+                {  
                     var ventanaAdmin = new InicioAdministrador();
                     UsuarioActual.UsuarioID = usuarioid;
                     ventanaAdmin.ShowDialog();
                 }
                 else if (tipoAcceso == "Operador")
                 {
-                    
                     var ventanaOperador = new InicioOperador();
                     UsuarioActual.UsuarioID = usuarioid;
                     ventanaOperador.ShowDialog();
-                    
                 }
-
                 this.Close();
             }
             else
@@ -75,13 +64,11 @@ namespace ProyectoFinal2
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-
                 string query = "SELECT * FROM Usuario WHERE usuarioID = @usuarioID AND contraseña = @contraseña";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@usuarioID", usuarioid);
                     cmd.Parameters.AddWithValue("@contraseña", contraseña);
-
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         return reader.HasRows;
@@ -95,15 +82,11 @@ namespace ProyectoFinal2
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-
                 string query = "SELECT Acceso FROM Usuario WHERE usuarioID = @usuarioID";
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@usuarioID", usuarioid);
-
-                    
                     object resultado = cmd.ExecuteScalar(); //Utilizo ExecuteScalar para obtener un único valor(en este caso, el tipo de acceso)
-
                     if (resultado != null)
                     {
                         return resultado.ToString();
@@ -123,24 +106,19 @@ namespace ProyectoFinal2
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
                     connection.Open();
-
                     string query = "INSERT INTO Sesion (UsuarioID, Fecha, HoraInicio) VALUES (@UsuarioID, @Fecha, @HoraInicio); SELECT SCOPE_IDENTITY();";
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         cmd.Parameters.AddWithValue("@UsuarioID", sesion.UsuarioID);
                         cmd.Parameters.AddWithValue("@Fecha", sesion.Fecha);
                         cmd.Parameters.AddWithValue("@HoraInicio", sesion.HoraInicio);
-
-                        
-                        int sesionID = Convert.ToInt32(cmd.ExecuteScalar());// Obtener el ID de la sesión recién insertada
-
-                        sesion.SesionID = sesionID; //Asigna el ID de la sesión al objeto Sesion
+                        int sesionID = Convert.ToInt32(cmd.ExecuteScalar());// obtiene el ID de la sesión recién insertada
+                        sesion.SesionID = sesionID; //asigna el ID de la sesión al objeto Sesion
                     }
                 }
             }
             catch (Exception ex)
             {
-
                 Console.WriteLine("Error al guardar la sesión: " + ex.Message);
             }
         }

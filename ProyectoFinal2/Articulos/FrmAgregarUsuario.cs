@@ -61,10 +61,8 @@ namespace ProyectoFinal2
             {
                 connection.Open();
 
-                // Crear la consulta SQL para la inserción
-                string query = "INSERT INTO Usuario (nombre, email, celular, contraseña, acceso) VALUES (@nombre, @email, @celular, @contraseña, @acceso)";
-
-                // Ejecutar la consulta SQL
+                
+                string query = "INSERT INTO Usuario (nombre, email, celular, contraseña, acceso) VALUES (@nombre, @email, @celular, @contraseña, @acceso)";// crea la consulta SQL para la inserción
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("@nombre", nombre);
@@ -78,17 +76,13 @@ namespace ProyectoFinal2
             }
         }
 
-        private void CargarUsuarios()
+        private void CargarUsuarios()//carga el usuario al dataGridView
         {
             var dataTable = new System.Data.DataTable();
-
-            
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-
                 string query = "SELECT usuarioID, nombre, email, celular, acceso FROM Usuario";
-
                 using (SqlCommand cmd = new SqlCommand(query, connection))
                 {
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
@@ -104,7 +98,6 @@ namespace ProyectoFinal2
             dataGridView1.Columns["celular"].HeaderText = "Celular";
             dataGridView1.Columns["acceso"].HeaderText = "Acceso";
         }
-
     }
 }
 

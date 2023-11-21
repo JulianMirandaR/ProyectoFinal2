@@ -33,6 +33,8 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.rdbApagar = new System.Windows.Forms.RadioButton();
+            this.rdbEncender = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -54,8 +56,6 @@
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.label8 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.rdbApagar = new System.Windows.Forms.RadioButton();
-            this.rdbEncender = new System.Windows.Forms.RadioButton();
             this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -127,6 +127,34 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1330, 604);
             this.panel1.TabIndex = 8;
+            // 
+            // rdbApagar
+            // 
+            this.rdbApagar.AutoSize = true;
+            this.rdbApagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbApagar.Location = new System.Drawing.Point(641, 145);
+            this.rdbApagar.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbApagar.Name = "rdbApagar";
+            this.rdbApagar.Size = new System.Drawing.Size(89, 24);
+            this.rdbApagar.TabIndex = 22;
+            this.rdbApagar.TabStop = true;
+            this.rdbApagar.Text = "Apagar";
+            this.rdbApagar.UseVisualStyleBackColor = true;
+            this.rdbApagar.CheckedChanged += new System.EventHandler(this.rdbApagar_CheckedChanged);
+            // 
+            // rdbEncender
+            // 
+            this.rdbEncender.AutoSize = true;
+            this.rdbEncender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbEncender.Location = new System.Drawing.Point(641, 112);
+            this.rdbEncender.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbEncender.Name = "rdbEncender";
+            this.rdbEncender.Size = new System.Drawing.Size(109, 24);
+            this.rdbEncender.TabIndex = 21;
+            this.rdbEncender.TabStop = true;
+            this.rdbEncender.Text = "Encender";
+            this.rdbEncender.UseVisualStyleBackColor = true;
+            this.rdbEncender.CheckedChanged += new System.EventHandler(this.rdbEncender_CheckedChanged);
             // 
             // label10
             // 
@@ -337,34 +365,6 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // rdbApagar
-            // 
-            this.rdbApagar.AutoSize = true;
-            this.rdbApagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbApagar.Location = new System.Drawing.Point(641, 145);
-            this.rdbApagar.Margin = new System.Windows.Forms.Padding(4);
-            this.rdbApagar.Name = "rdbApagar";
-            this.rdbApagar.Size = new System.Drawing.Size(89, 24);
-            this.rdbApagar.TabIndex = 22;
-            this.rdbApagar.TabStop = true;
-            this.rdbApagar.Text = "Apagar";
-            this.rdbApagar.UseVisualStyleBackColor = true;
-            this.rdbApagar.CheckedChanged += new System.EventHandler(this.rdbApagar_CheckedChanged);
-            // 
-            // rdbEncender
-            // 
-            this.rdbEncender.AutoSize = true;
-            this.rdbEncender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rdbEncender.Location = new System.Drawing.Point(641, 112);
-            this.rdbEncender.Margin = new System.Windows.Forms.Padding(4);
-            this.rdbEncender.Name = "rdbEncender";
-            this.rdbEncender.Size = new System.Drawing.Size(109, 24);
-            this.rdbEncender.TabIndex = 21;
-            this.rdbEncender.TabStop = true;
-            this.rdbEncender.Text = "Encender";
-            this.rdbEncender.UseVisualStyleBackColor = true;
-            this.rdbEncender.CheckedChanged += new System.EventHandler(this.rdbEncender_CheckedChanged);
-            // 
             // timer2
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
@@ -374,7 +374,7 @@
             this.AllowDrop = true;
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
             this.AutoScroll = true;
-            this.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1359, 729);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel1);
@@ -420,9 +420,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.RadioButton rdbApagar;
-        private System.Windows.Forms.RadioButton rdbEncender;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.RadioButton rdbApagar;
+        private System.Windows.Forms.RadioButton rdbEncender;
     }
 }

@@ -22,32 +22,30 @@ namespace ProyectoFinal2
 
         private void CargarDatosVentas()
         {
-            // Crear una lista para almacenar las ventas
-            List<Venta> ventas = new List<Venta>();
+            
+            List<Venta> ventas = new List<Venta>();//lista para almacenar las ventas
 
             try
             {
-                // Conectar a la base de datos
                 using (SqlConnection connection = new SqlConnection(ConnectionString))
                 {
                     connection.Open();
 
-                    // Consulta SQL para obtener datos de ventas
-                    string query = "SELECT * FROM Venta";
+                    
+                    string query = "SELECT * FROM Venta";// consulta SQL para obtener datos de ventas
 
                     using (SqlCommand cmd = new SqlCommand(query, connection))
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            // Leer datos y agregar a la lista de ventas
-                            while (reader.Read())
+                            
+                            while (reader.Read())// Leer datos y agregar a la lista de ventas
                             {
                                 Venta venta = new Venta
                                 {
                                     VentaID = Convert.ToInt32(reader["VentaID"]),
                                     Monto = Convert.ToDecimal(reader["Monto"]),
                                     Fecha = Convert.ToDateTime(reader["Fecha"]),
-                                    Hora = TimeSpan.Parse(reader["Hora"].ToString()),
                                     UsuarioID = Convert.ToInt32(reader["UsuarioID"])
                                 };
 
@@ -55,10 +53,8 @@ namespace ProyectoFinal2
                             }
                         }
                     }
-                }
-
-                // Mostrar las ventas en el DataGridView
-                dataGridView1.DataSource = ConvertirListaADatatable(ventas);
+                }                
+                dataGridView1.DataSource = ConvertirListaADatatable(ventas);// muestra las ventas en el DataGridView
             }
             catch (Exception ex)
             {
@@ -74,13 +70,11 @@ namespace ProyectoFinal2
             dataTable.Columns.Add("VentaID", typeof(int));
             dataTable.Columns.Add("Monto", typeof(decimal));
             dataTable.Columns.Add("Fecha", typeof(DateTime));
-            dataTable.Columns.Add("Hora", typeof(TimeSpan));
             dataTable.Columns.Add("UsuarioID", typeof(string));
 
-            // Agregar filas al DataTable
             foreach (Venta venta in ventas)
             {
-                dataTable.Rows.Add(venta.VentaID, venta.Monto, venta.Fecha, venta.Hora, venta.UsuarioID);
+                dataTable.Rows.Add(venta.VentaID, venta.Monto, venta.Fecha, venta.UsuarioID);
             }
 
             return dataTable;

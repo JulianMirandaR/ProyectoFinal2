@@ -38,10 +38,8 @@ namespace ProyectoFinal2
                 string consulta = "SELECT usuarioID, nombre FROM Usuario";
                 SqlDataAdapter adaptador = new SqlDataAdapter(consulta, conexion);
                 DataTable tablaUsuarios = new DataTable();
-                adaptador.Fill(tablaUsuarios);
-
-                // Enlaza los datos al ComboBox
-                cmbUsuario.DataSource = tablaUsuarios;
+                adaptador.Fill(tablaUsuarios);//Llena la tablaUsuarios con los datos recuperados por el adaptador de la base de datos.
+                cmbUsuario.DataSource = tablaUsuarios;// Enlaza los datos al ComboBox
                 cmbUsuario.DisplayMember = "nombre";
                 cmbUsuario.ValueMember = "usuarioID";
             }
@@ -52,12 +50,10 @@ namespace ProyectoFinal2
             using (SqlConnection conexion = new SqlConnection(ConnectionString))
             {
                 conexion.Open();
-                string consulta = "SELECT usuarioID, email, nombre, celular, acceso FROM Usuario WHERE usuarioID = @usuarioID";
+                string consulta = "SELECT usuarioID, email, nombre, celular, acceso FROM Usuario WHERE usuarioID = @usuarioID";//para mostrar los detalles
                 SqlCommand comando = new SqlCommand(consulta, conexion);
                 comando.Parameters.AddWithValue("@usuarioID", usuarioID);
-
                 SqlDataReader lector = comando.ExecuteReader();
-
                 if (lector.Read())
                 {
                     LimpiarDetallesUsuario();

@@ -22,7 +22,6 @@ namespace ProyectoFinal2
         private void CargarProveedores()
         {
             cmbProveedor.ValueMember = "ProveedorID";
-
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
@@ -38,7 +37,7 @@ namespace ProyectoFinal2
         }
 
 
-        private void MostrarDetallesProveedor(int proveedorID)
+        private void MostrarDetallesProveedor(int proveedorID)//llena los text box
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
@@ -46,9 +45,7 @@ namespace ProyectoFinal2
                 string consulta = "SELECT ProveedorID, Nombre, Cuit, Email, Celular, Rubro, Direccion FROM Proveedor WHERE ProveedorID = @proveedorID";
                 SqlCommand comando = new SqlCommand(consulta, connection);
                 comando.Parameters.AddWithValue("@proveedorID", proveedorID);
-
                 SqlDataReader lector = comando.ExecuteReader();
-
                 if (lector.Read())
                 {
                     txtIdProveedor.Text = lector["ProveedorID"].ToString();
@@ -76,7 +73,7 @@ namespace ProyectoFinal2
             txtDireccion.Clear();
         }
 
-        private void ActualizarProveedor(int proveedorID)
+        private void ActualizarProveedor(int proveedorID)// actualiza los datos
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {

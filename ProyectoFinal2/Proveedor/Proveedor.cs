@@ -8,8 +8,6 @@ namespace ProyectoFinal2
 {
     public class Proveedor
     {
-
-
         public Proveedor(int proveedorid, string nombre, long cuit, string email, long celular, string rubro, string direccion)
         {
             Proveedorid = proveedorid;
@@ -19,7 +17,6 @@ namespace ProyectoFinal2
             Celular = celular;
             Rubro = rubro;
             Direccion = direccion;
-
         }
 
         public int Proveedorid { get; set; }
@@ -30,7 +27,4 @@ namespace ProyectoFinal2
         public string Rubro { get; set; }
         public string Direccion { get;  set; }
     }
-
-
-
 }

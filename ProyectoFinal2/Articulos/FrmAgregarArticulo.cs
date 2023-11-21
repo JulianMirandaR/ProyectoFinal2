@@ -35,6 +35,7 @@ namespace ProyectoFinal2
             txtPrecioVenta.Clear();
             txtStock.Clear();
         }
+        //Lo siguiente es para validar datos
 
         private void txtDetalle_Validating_1(object sender, CancelEventArgs e)
         {
@@ -139,7 +140,7 @@ namespace ProyectoFinal2
         }
 
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private void btnGuardar_Click(object sender, EventArgs e)//Se guarda el articulo
         {
             if (FormularioValidado())
             {
@@ -219,7 +220,7 @@ namespace ProyectoFinal2
             }
             return detalle;
         }
-        private void rdbApagar_CheckedChanged(object sender, EventArgs e)
+        private void rdbApagar_CheckedChanged(object sender, EventArgs e)//Apagar camara
         {
             timer1.Stop();
             timer2.Stop();

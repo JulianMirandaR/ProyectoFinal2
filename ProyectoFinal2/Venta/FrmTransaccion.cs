@@ -29,20 +29,16 @@ namespace ProyectoFinal2
         private List<Articulo> Articulos;
         private List<Articulo> listaArticulos = new List<Articulo>();
         private Articulo articuloSeleccionado;
-        decimal total = 0;
-        int UsuarioActivo = 0;
+        decimal total = 0;//Va a ser el precio total calculado desde el datagridview
 
         public FrmTransaccion()
         {
             InitializeComponent();
             CargarArticulosEnComboBox();
-            if (!timer1.Enabled) timer1.Enabled = true;
-            if (!timer2.Enabled) timer2.Enabled = true;
-            timer1.Start();
-            timer2.Start();
             ConfigurarDataGridView();
             btnEliminar.Click += btnEliminar_Click;
         }
+
 
         private void FrmTransaccion_Load(object sender, EventArgs e)
         {
@@ -52,9 +48,9 @@ namespace ProyectoFinal2
             timer1.Interval = 40;
             timer2.Interval = 250;
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            Camara.Start();
             CargarArticulos();
         }
+
         private string DetalleArticulo(string _codigoBarra)
         {
             string detalle = string.Empty;
@@ -68,6 +64,7 @@ namespace ProyectoFinal2
             }
             return detalle;
         }
+
         private void ConfigurarDataGridView()
         {
             dataGridView1.Columns.Add("ArticuloId", "Articulo ID");
@@ -75,9 +72,9 @@ namespace ProyectoFinal2
             dataGridView1.Columns.Add("Cantidad", "Cantidad");
             dataGridView1.Columns.Add("PrecioUnitario", "Precio Unitario");
             dataGridView1.Columns.Add("PrecioTotal", "Precio Total");
-
-            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellClick += dataGridView1_CellClick;// para eliminar un articulo
         }
+
 
         private void CargarArticulosEnComboBox()
         {
@@ -87,7 +84,7 @@ namespace ProyectoFinal2
             if (resultado.IsValid)
             {
                 cmbArticulo.DataSource = resultado.Articulos;
-                cmbArticulo.DisplayMember = "Detalle";
+                cmbArticulo.DisplayMember = "Detalle";// me mostrara el articulo
             }
             else
             {
@@ -100,11 +97,12 @@ namespace ProyectoFinal2
             total = 0;
             foreach (DataGridViewRow fila in dataGridView1.Rows)
             {
-                total += Convert.ToDecimal(fila.Cells["PrecioTotal"].Value);
+                total += Convert.ToDecimal(fila.Cells["PrecioTotal"].Value);//calcula el precio total
             }
             lblTotal.Text = "TOTAL: ";
             lblTotal.Text += total.ToString("C");
         }
+
         private void LimpiarControles()
         {
             cmbArticulo.SelectedIndex = -1;
@@ -115,6 +113,7 @@ namespace ProyectoFinal2
             txtCantidad.Text = "1";
             pictureBox1.Image = null;
         }
+
         private void btnFinalizarVenta_Click(object sender, EventArgs e)
         {
             foreach (DataGridViewRow fila in dataGridView1.Rows)
@@ -137,6 +136,7 @@ namespace ProyectoFinal2
             CalcularPrecioTotal();
             MessageBox.Show("Venta finalizada y guardada en la base de datos.");
         }
+
         private void cmbArticulo_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             if (cmbArticulo.SelectedIndex != -1)
@@ -181,6 +181,14 @@ namespace ProyectoFinal2
             dataGridView1.Rows.Add(fila);
             CalcularPrecioTotal();// Calcula y muestra el precio total
             LimpiarControles();// Limpia los controles para el próximo artículo
+            if (rdbEncender.Checked)
+            {
+                Camara.Start();
+                if (!timer1.Enabled) timer1.Enabled = true;
+                if (!timer2.Enabled) timer2.Enabled = true;
+                timer1.Start();
+                timer2.Start();
+            }
         }
 
         private void CargarArticulos()
@@ -228,7 +236,7 @@ namespace ProyectoFinal2
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            var fecha = DateTime.Now.ToString("dd/MM/yyyy");
+            var fecha = DateTime.Now.ToString("dd/MM/yyyy");// dia para el ticket
             decimal totalGeneral = 0;
             QuestPDF.Settings.License = LicenseType.Community;
 
@@ -238,6 +246,12 @@ namespace ProyectoFinal2
                 {
                     page.Content().Column(col =>
                     {
+                        col.Item().PaddingBottom(10).Text(text =>
+                        {
+                            text.Span("Los Dos Chinos").FontSize(12).SemiBold(); 
+                        });
+
+                        col.Item().LineHorizontal(0.8f).LineColor("#101010");
                         col.Item().Text(text =>
                         {
                             text.Span("Fecha: ").FontSize(9).SemiBold();
@@ -290,7 +304,6 @@ namespace ProyectoFinal2
                     });
                 });
             });
-
             try
             {
                 document.GeneratePdf(@"C:\Users\juuli\Desktop\ProyectoFinal2\ticket.pdf");
@@ -304,29 +317,36 @@ namespace ProyectoFinal2
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-
-            Venta nuevaVenta = new Venta// Crear un objeto Venta con los datos de la venta actual
+            try
             {
-                VentaID = 1,
-                Monto = total,
-                Fecha = DateTime.Now.Date,
-                Hora = DateTime.Now.TimeOfDay,
-                UsuarioID = obtenerIdUsuarioActivo()
-            };
+                Venta nuevaVenta = new Venta
+                {
+                    //el id se va generando solo
+                    Monto = total,
+                    Fecha = DateTime.Now.Date,
+                    Hora = DateTime.Now.TimeOfDay,
+                    UsuarioID = obtenerIdUsuarioActivo()
+                };
 
-            if (VentaController.AgregarVenta(nuevaVenta))
-            {
-                listaArticulos.Clear();// Limpia la lista de artículos vendidos y el DataGridView después de guardar la venta
-                dataGridView1.Rows.Clear();
-                CalcularPrecioTotal();
+                if (VentaController.AgregarVenta(nuevaVenta))// llamada al metodo de VentaController para agregar la venta en la base de datos
+                {
+                    listaArticulos.Clear();
+                    dataGridView1.Rows.Clear();
+                    CalcularPrecioTotal();
 
-                MessageBox.Show("Venta finalizada");
+                    MessageBox.Show("Venta finalizada y guardada en la base de datos.");
+                }
+                else
+                {
+                    MessageBox.Show("Error al guardar la venta en la base de datos. Error 1");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Error al guardar la venta en la base de datos.");
+                MessageBox.Show("Error al guardar la venta en la base de datos: Error 2" + ex.Message);
             }
         }
+
         private int obtenerIdUsuarioActivo()
         {
             return UsuarioActual.UsuarioID;
@@ -344,40 +364,53 @@ namespace ProyectoFinal2
 
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.SelectedRows.Count >= 0)
-            {
-                foreach (DataGridViewRow row in dataGridView1.SelectedRows)
-                {
-                   decimal cantidad = Convert.ToDecimal(row.Cells["Cantidad"].Value);
-                   decimal precioUnitario = Convert.ToDecimal(row.Cells["PrecioUnitario"].Value);
-                   decimal subtotalArticulo = cantidad * precioUnitario;
-                   total -= subtotalArticulo;
-                    // O simplemente puedes eliminar la fila directamente
-                    if (!row.IsNewRow)
-                    {
-                        dataGridView1.Rows.Remove(row);
-                    }
-                }
 
-                // Reinicia el valor de total antes de recalcularlo
-                total = 0;
-                foreach (DataGridViewRow fila in dataGridView1.Rows)
-                {
-                    if (fila.Cells["Cantidad"].Value != null && fila.Cells["PrecioUnitario"].Value != null)
-                    {
-                        decimal cantidad = Convert.ToDecimal(fila.Cells["Cantidad"].Value);
-                        decimal precioUnitario = Convert.ToDecimal(fila.Cells["PrecioUnitario"].Value);
-                        total += cantidad * precioUnitario;
-                    }
-                }
-
-                // Actualiza el total en la interfaz
-                lblTotal.Text = "TOTAL: " + total.ToString("C");
-            }
-            else
+            foreach (DataGridViewRow row in dataGridView1.SelectedRows)
             {
-                MessageBox.Show("Selecciona una fila para eliminar.");
+                decimal cantidad = Convert.ToDecimal(row.Cells["Cantidad"].Value);
+                decimal precioUnitario = Convert.ToDecimal(row.Cells["PrecioUnitario"].Value);
+                decimal subtotalArticulo = cantidad * precioUnitario;
+                total -= subtotalArticulo;
+                // O simplemente puedes eliminar la fila directamente
+                if (!row.IsNewRow)
+                {
+                    dataGridView1.Rows.Remove(row);
+                }
             }
+
+            // Reinicia el valor de total antes de recalcularlo
+            total = 0;
+            foreach (DataGridViewRow fila in dataGridView1.Rows)
+            {
+                if (fila.Cells["Cantidad"].Value != null && fila.Cells["PrecioUnitario"].Value != null)
+                {
+                    decimal cantidad = Convert.ToDecimal(fila.Cells["Cantidad"].Value);
+                    decimal precioUnitario = Convert.ToDecimal(fila.Cells["PrecioUnitario"].Value);
+                    total += cantidad * precioUnitario;
+                }
+            }
+
+            // Actualiza el total en la interfaz
+            lblTotal.Text = "TOTAL: " + total.ToString("C");
+
+        }
+
+        private void rdbEncender_CheckedChanged(object sender, EventArgs e)//agregue el boton de encendido o apagado porque si no al quedar abierta la camara salta error
+        {
+            Camara.Start();
+            if (!timer1.Enabled) timer1.Enabled = true;
+            if (!timer2.Enabled) timer2.Enabled = true;
+            timer1.Start();
+            timer2.Start();
+        }
+
+        private void rdbApagar_CheckedChanged(object sender, EventArgs e)
+        {
+            timer1.Stop();
+            timer2.Stop();
+            timer1.Enabled = false;
+            timer2.Enabled = false;
+            Camara.Stop();
         }
     }
 }

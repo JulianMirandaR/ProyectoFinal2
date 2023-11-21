@@ -29,7 +29,7 @@ namespace ProyectoFinal2
             Frame = new Mat();
             Camara = new VideoCapture();
             timer1.Interval = 60;
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;//Todas las camaras
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox3.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox4.SizeMode = PictureBoxSizeMode.StretchImage;

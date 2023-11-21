@@ -19,7 +19,7 @@ namespace ProyectoFinal2
             InitializeComponent();
         }
 
-        private void LimpiarPantalla()
+        private void LimpiarPantalla()//Limpia los textBox
         {
             txtNombre.Clear();
             txtCuit.Clear();
@@ -28,8 +28,6 @@ namespace ProyectoFinal2
             txtRubro.Clear();
             txtDireccion.Clear();
         }
-
-
 
         public bool FormularioValidado()
         {
@@ -40,11 +38,11 @@ namespace ProyectoFinal2
             if (!Validator.IsAlphaNumeric(txtCelular.Text)) resultado = false;
             if (!Validator.IsAlphabetic(txtRubro.Text)) resultado = false;
             if (!Validator.IsDomicilio(txtDireccion.Text)) resultado = false;
-            resultado = true;//no se porque siempre me da falso
+            resultado = true;//no se porque siempre me da falso.Corregir
             return resultado;
         }
 
-
+        //los siguientes son validores
         private void txtNombre_Validating(object sender, CancelEventArgs e)
         {
             if (!Validator.IsAlphabetic(txtNombre.Text))
@@ -133,7 +131,7 @@ namespace ProyectoFinal2
             }
         }
 
-        private void btnGuardar_Click_1(object sender, EventArgs e)
+        private void btnGuardar_Click_1(object sender, EventArgs e)//Guardar proveedor en el servidor local
         {
             if (FormularioValidado())
             {

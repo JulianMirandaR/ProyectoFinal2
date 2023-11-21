@@ -47,19 +47,19 @@ namespace ProyectoFinal2
         private void btnSeleccionar_Click_1(object sender, EventArgs e)
         {
             
-            if (dataGridView1.SelectedRows.Count > 0)// Obtiene el artículo seleccionado en el dataGridView1
+            if (dataGridView1.SelectedRows.Count > 0)// obtiene el artículo seleccionado en el dataGridView1
             {
                 var selectedRow = dataGridView1.SelectedRows[0];
                 long articuloId = Convert.ToInt64(selectedRow.Cells["Articuloid"].Value);
 
                 
-                var resultado = ArticuloController.GetArticulo(articuloId);// Utiliza tu controlador de Artículo para obtener el artículo seleccionado
+                var resultado = ArticuloController.GetArticulo(articuloId);// utiliza tu controlador de Artículo para obtener el artículo seleccionado
 
                 if (resultado.IsValid)
                 {
                     var articulo = resultado.Articulos[0];
 
-                    // Llena los controles del formulario con los datos del artículo
+                    // llena los controles del formulario con los datos del artículo
                     txtIdArticulo.Text = articulo.Articuloid.ToString();
                     txtDetalle.Text = articulo.Detalle;
                     txtPresentacion.Text = articulo.Presentacion;
@@ -68,7 +68,7 @@ namespace ProyectoFinal2
                     txtStock.Text = articulo.Stock.ToString();
 
    
-                    var proveedoresResultado = ProveedorController.GetProveedores(); // Utiliza tu controlador de Proveedor para obtener la lista de proveedores
+                    var proveedoresResultado = ProveedorController.GetProveedores(); // utiliza tu controlador de Proveedor para obtener la lista de proveedores
 
                     if (proveedoresResultado.IsValid)
                     {
@@ -76,7 +76,7 @@ namespace ProyectoFinal2
                         cmbProveedor.DisplayMember = "Nombre";
                         cmbProveedor.ValueMember = "ProveedorID";
 
-                        // Selecciona el proveedor correspondiente al artículo
+                        // selecciona el proveedor correspondiente al artículo
                         cmbProveedor.SelectedValue = articulo.Proveedor;
                     }
                     else
@@ -97,21 +97,21 @@ namespace ProyectoFinal2
             long articuloId = Convert.ToInt64(txtIdArticulo.Text);//
             string detalle = txtDetalle.Text;//
             string presentacion = txtPresentacion.Text;//
-            decimal precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);//// Obtenner los datos del formulario
+            decimal precioCompra = Convert.ToDecimal(txtPrecioCompra.Text);//// obtener los datos del formulario
             decimal precioVenta = Convert.ToDecimal(txtPrecioVenta.Text);//
             int stock = Convert.ToInt32(txtStock.Text);//
             string proveedorId = cmbProveedor.Text;//
 
             
-            Articulo articulo = new Articulo(articuloId, detalle, presentacion, precioCompra, precioVenta, stock, proveedorId);// Crea un nuevo objeto Articulo con los datos actualizados
+            Articulo articulo = new Articulo(articuloId, detalle, presentacion, precioCompra, precioVenta, stock, proveedorId);//crea un nuevo objeto Articulo con los datos actualizados
 
             
-            var resultado = ArticuloController.ModificarArticulo(articulo);// Utiliza tu controlador de Artículo para modificar el artículo en la base de datos
+            var resultado = ArticuloController.ModificarArticulo(articulo);// utiliza tu controlador de Artículo para modificar el artículo en la base de datos
 
             if (resultado.IsValid)
             {
                 MessageBox.Show("Artículo modificado correctamente");
-                CargarDatosArticulos(); // Vuelve a cargar la lista de artículos
+                CargarDatosArticulos(); // vuelve a cargar la lista de artículos
             }
             else
             {

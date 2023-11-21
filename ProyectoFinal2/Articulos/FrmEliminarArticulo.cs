@@ -10,8 +10,6 @@ namespace ProyectoFinal2
         {
             InitializeComponent();
         }
-
-
         private void LimpiarPantalla()
         {
             lblIdArticulo.Text = "IDArticulo: ";
@@ -29,12 +27,9 @@ namespace ProyectoFinal2
             if (ListaNombres.Articulos.Count > 0)
             {
                 dataGridView1.DataSource = ListaNombres.Articulos;
-                // Asegúrate de que solo se muestren las columnas que necesitas
                 dataGridView1.Columns["Articuloid"].Visible = false;
                 dataGridView1.Columns[6].Visible = false;
-
-                // Ajusta el ancho de las columnas según tus necesidades
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;// ajusta el ancho de las columnas según tus necesidades
             }
             else
             {
@@ -42,12 +37,11 @@ namespace ProyectoFinal2
             }
         }
 
-        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)//Seleccion en el datagridview
         {
             if (dataGridView1.SelectedRows.Count > 0)
             {
                 var dtoDetalle = (DtoDetalle)dataGridView1.SelectedRows[0].DataBoundItem;
-
                 lblIdArticulo.Text = "IDArticulo: " + dtoDetalle.Articuloid.ToString();
                 lblDetalle.Text = "Detalle: " + dtoDetalle.Detalle;
                 lblPresentacion.Text = "Presentacion: " + dtoDetalle.Presentacion;
@@ -63,7 +57,6 @@ namespace ProyectoFinal2
             {
                 var articulo = (Articulo)dataGridView1.SelectedRows[0].DataBoundItem;
                 var articuloid = articulo.Articuloid;
-
                 DialogResult respuesta = MessageBox.Show("¿Está seguro que desea eliminar este artículo?", articulo.Detalle, MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (respuesta == DialogResult.Yes)
                 {
@@ -103,8 +96,7 @@ namespace ProyectoFinal2
 
         private void FrmEliminarArticulo_Load_1(object sender, EventArgs e)
         {
-            // Llena el DataGridView con los nombres o detalles de los artículos
-            LlenarDataGridView();
+            LlenarDataGridView();// llena el DataGridView con los nombres o detalles de los artículos
             LimpiarPantalla();
         }
     }

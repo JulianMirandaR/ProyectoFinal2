@@ -14,7 +14,7 @@ namespace ProyectoFinal2
     public partial class FrmModificarUsuario : Form
     {
         public static readonly string ConnectionString = "Server=LAPTOP-ASUS;Database=AlmacenDosChinos; Trusted_Connection=True;TrustServerCertificate=True;";
-        private List <string> acceso = new List<string>() {"Administrador","Operador" };
+        private List <string> acceso = new List<string>() {"Administrador","Operador" };//solo son esas dos opciones
         public FrmModificarUsuario()
         {
             InitializeComponent();
@@ -93,17 +93,6 @@ namespace ProyectoFinal2
                     cmd.Parameters.AddWithValue("@email", txtEmail.Text);
                     cmd.Parameters.AddWithValue("@celular", txtCelular.Text);
                     cmd.Parameters.AddWithValue("@acceso", cmbAcceso.SelectedItem.ToString());
-
-                    /*if (cmbAcceso.SelectedItem != null)
-                    {
-                        cmd.Parameters.AddWithValue("@acceso", cmbAcceso.SelectedItem.ToString());
-                    }
-                    else
-                    {
-                        // Manejar la situación donde SelectedItem es null
-                        cmd.Parameters.AddWithValue("@acceso", DBNull.Value);
-                    }*/
-
                     int filasAfectadas = cmd.ExecuteNonQuery();
 
                     if (filasAfectadas > 0)

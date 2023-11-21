@@ -19,7 +19,6 @@ namespace ProyectoFinal2
         public UserConfig()
         {
             InitializeComponent();
-            this.usuarioID = usuarioID;
             CargarDatosUsuario();
         }
 
@@ -37,16 +36,14 @@ namespace ProyectoFinal2
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-
-                // Asegúrate de tener el UsuarioID almacenado al iniciar sesión
                 int usuarioID = UsuarioActual.UsuarioID;
 
-                // Utiliza el usuarioID para obtener la información del usuario
-                string query = "SELECT * FROM Usuario WHERE usuarioID = @usuarioID";
+                
+                string query = "SELECT * FROM Usuario WHERE usuarioID = @usuarioID";// utiliza el usuarioID para obtener la información del usuario
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Utiliza el UsuarioID almacenado al iniciar sesión
-                    command.Parameters.AddWithValue("@usuarioID", usuarioID);
+                   
+                    command.Parameters.AddWithValue("@usuarioID", usuarioID); // utiliza el UsuarioID almacenado al iniciar sesión
 
                     SqlDataReader reader = command.ExecuteReader();
                     if (reader.Read())
@@ -88,15 +85,13 @@ namespace ProyectoFinal2
             {
                 connection.Open();
 
-                // Verifica la contraseña actual en la base de datos
-                string query = "SELECT contraseña FROM Usuario WHERE usuarioID = @usuarioID";
+                
+                string query = "SELECT contraseña FROM Usuario WHERE usuarioID = @usuarioID";// verifica la contraseña actual en la base de datos
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Asegúrate de tener el valor para el parámetro usuarioID
                     if (string.IsNullOrEmpty(usuarioID))
                     {
-                        // Maneja la falta de usuarioID según tus requisitos
-                        return false;
+                        return false;// Por si no detecta un usuarioID
                     }
 
                     command.Parameters.AddWithValue("@usuarioID", usuarioID);
@@ -121,22 +116,22 @@ namespace ProyectoFinal2
             {
                 connection.Open();
 
-                // Actualiza los datos del usuario en la base de datos
+
                 string query = "UPDATE Usuario SET nombre = @nombre, email = @email, celular = @celular, contraseña = @NuevaContraseña WHERE usuarioID = @usuarioID";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@nombre", txtNombre.Text);
                     command.Parameters.AddWithValue("@email", txtEmail.Text);
                     command.Parameters.AddWithValue("@celular", txtCelular.Text);
-                    command.Parameters.AddWithValue("@NuevaContraseña", txtNuevaContraseña.Text); // Nueva contraseña
+                    command.Parameters.AddWithValue("@NuevaContraseña", txtNuevaContraseña.Text); //Nueva contraseña
                     command.Parameters.AddWithValue("@usuarioID", usuarioID);
 
                     int rowsAffected = command.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
-                        return true; // Los datos se actualizaron correctamente
+                        return true; // los datos se actualizaron correctamente
                     }
-                    return false; // No se pudo actualizar
+                    return false; // No se pudieron actualizar
                 }
             }
         }

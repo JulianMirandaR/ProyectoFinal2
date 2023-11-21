@@ -14,7 +14,6 @@ namespace ProyectoFinal2
     public partial class FormEliminarProveedor : Form
     {
         public static readonly string ConnectionString = "Server=LAPTOP-ASUS;Database=AlmacenDosChinos; Trusted_Connection=True;TrustServerCertificate=True;";
-
         public FormEliminarProveedor()
         {
             InitializeComponent();
@@ -24,8 +23,7 @@ namespace ProyectoFinal2
         private void CargarProveedores()
         {
             cmbProveedor.ValueMember = "proveedorID";
-
-            using (SqlConnection connection = new SqlConnection(ConnectionString))// Cargar opciones en el ComboBox para seleccionar el proveedor
+            using (SqlConnection connection = new SqlConnection(ConnectionString))// cargar opciones en el ComboBox para seleccionar el proveedor
             {
                 connection.Open();
                 string consulta = "SELECT proveedorID, nombre FROM Proveedor";
@@ -34,7 +32,7 @@ namespace ProyectoFinal2
                 adaptador.Fill(tablaProveedores);
 
                 
-                cmbProveedor.DataSource = tablaProveedores;// Enlazar datos al ComboBox
+                cmbProveedor.DataSource = tablaProveedores;// enlazar datos al ComboBox
                 cmbProveedor.DisplayMember = "nombre";
                 cmbProveedor.ValueMember = "proveedorID";
             }
@@ -49,7 +47,7 @@ namespace ProyectoFinal2
                 SqlCommand comando = new SqlCommand(consulta, connection);
                 comando.Parameters.AddWithValue("@proveedorID", proveedorID);
 
-                SqlDataReader lector = comando.ExecuteReader();
+                SqlDataReader lector = comando.ExecuteReader(); 
 
                 if (lector.Read())
                 {
@@ -88,7 +86,7 @@ namespace ProyectoFinal2
                 connection.Open();
                 string consulta = "DELETE FROM Proveedor WHERE proveedorID = @proveedorID";
                 SqlCommand comando = new SqlCommand(consulta, connection);
-                comando.Parameters.AddWithValue("@proveedorID", proveedorID);
+                comando.Parameters.AddWithValue("@proveedorID", proveedorID); //Agrega el parámetro @proveedorID al comando para utilizarlo en la consulta SQL.
 
                 int filasAfectadas = comando.ExecuteNonQuery();
 
@@ -96,7 +94,7 @@ namespace ProyectoFinal2
                 {
                     MessageBox.Show("Proveedor eliminado correctamente");
                     LimpiarDetallesProveedor();
-                    CargarProveedores(); // Actualizar la lista de proveedores en el ComboBox
+                    CargarProveedores(); // Actualiza la lista de proveedores en el ComboBox
                 }
                 else
                 {

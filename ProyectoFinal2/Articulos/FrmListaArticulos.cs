@@ -13,7 +13,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProyectoFinal2
 {
-    public partial class FrmListaArticulos : Form
+    public partial class FrmListaArticulos : Form// en este form solo se muetra los articulos en la lista
     {
         public FrmListaArticulos()
         {

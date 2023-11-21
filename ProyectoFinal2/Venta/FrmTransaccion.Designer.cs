@@ -32,17 +32,9 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTotal = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.txtCantidad = new System.Windows.Forms.TextBox();
-            this.cmbArticulo = new System.Windows.Forms.ComboBox();
-            this.txtCodigo = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblPresentacion = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.lblCantidad = new System.Windows.Forms.Label();
-            this.lblPrecio = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnImprimir = new System.Windows.Forms.Button();
@@ -52,6 +44,16 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.lblPrecio = new System.Windows.Forms.Label();
+            this.lblCantidad = new System.Windows.Forms.Label();
+            this.lblPresentacion = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCodigo = new System.Windows.Forms.TextBox();
+            this.cmbArticulo = new System.Windows.Forms.ComboBox();
+            this.txtCantidad = new System.Windows.Forms.TextBox();
+            this.rdbApagar = new System.Windows.Forms.RadioButton();
+            this.rdbEncender = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -80,7 +82,7 @@
             // 
             this.lblTotal.AutoSize = true;
             this.lblTotal.Font = new System.Drawing.Font("Microsoft Tai Le", 25.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotal.Location = new System.Drawing.Point(1138, 504);
+            this.lblTotal.Location = new System.Drawing.Point(1131, 525);
             this.lblTotal.Name = "lblTotal";
             this.lblTotal.Size = new System.Drawing.Size(171, 55);
             this.lblTotal.TabIndex = 25;
@@ -90,6 +92,8 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.rdbApagar);
+            this.panel2.Controls.Add(this.rdbEncender);
             this.panel2.Controls.Add(this.txtCantidad);
             this.panel2.Controls.Add(this.cmbArticulo);
             this.panel2.Controls.Add(this.txtCodigo);
@@ -103,59 +107,13 @@
             this.panel2.Controls.Add(this.label1);
             this.panel2.Location = new System.Drawing.Point(814, 60);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(677, 426);
+            this.panel2.Size = new System.Drawing.Size(677, 431);
             this.panel2.TabIndex = 17;
-            // 
-            // txtCantidad
-            // 
-            this.txtCantidad.Location = new System.Drawing.Point(549, 227);
-            this.txtCantidad.Name = "txtCantidad";
-            this.txtCantidad.Size = new System.Drawing.Size(100, 22);
-            this.txtCantidad.TabIndex = 30;
-            this.txtCantidad.Text = "1";
-            // 
-            // cmbArticulo
-            // 
-            this.cmbArticulo.FormattingEnabled = true;
-            this.cmbArticulo.Location = new System.Drawing.Point(147, 181);
-            this.cmbArticulo.Name = "cmbArticulo";
-            this.cmbArticulo.Size = new System.Drawing.Size(286, 24);
-            this.cmbArticulo.TabIndex = 29;
-            this.cmbArticulo.SelectedIndexChanged += new System.EventHandler(this.cmbArticulo_SelectedIndexChanged_1);
-            // 
-            // txtCodigo
-            // 
-            this.txtCodigo.Location = new System.Drawing.Point(147, 231);
-            this.txtCodigo.Name = "txtCodigo";
-            this.txtCodigo.Size = new System.Drawing.Size(286, 22);
-            this.txtCodigo.TabIndex = 28;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label6.Location = new System.Drawing.Point(43, 227);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(83, 26);
-            this.label6.TabIndex = 27;
-            this.label6.Text = "Codigo:";
-            // 
-            // lblPresentacion
-            // 
-            this.lblPresentacion.AutoSize = true;
-            this.lblPresentacion.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPresentacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPresentacion.Location = new System.Drawing.Point(43, 265);
-            this.lblPresentacion.Name = "lblPresentacion";
-            this.lblPresentacion.Size = new System.Drawing.Size(139, 26);
-            this.lblPresentacion.TabIndex = 26;
-            this.lblPresentacion.Text = "Presentacion:";
             // 
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(36, 369);
+            this.button2.Location = new System.Drawing.Point(48, 339);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(116, 37);
             this.button2.TabIndex = 25;
@@ -165,7 +123,7 @@
             // btnAgregar
             // 
             this.btnAgregar.Font = new System.Drawing.Font("Microsoft Tai Le", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAgregar.Location = new System.Drawing.Point(526, 369);
+            this.btnAgregar.Location = new System.Drawing.Point(517, 339);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(116, 37);
             this.btnAgregar.TabIndex = 23;
@@ -179,43 +137,10 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(48, 34);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(585, 117);
+            this.pictureBox1.Size = new System.Drawing.Size(508, 117);
             this.pictureBox1.TabIndex = 17;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // lblCantidad
-            // 
-            this.lblCantidad.AutoSize = true;
-            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCantidad.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblCantidad.Location = new System.Drawing.Point(442, 227);
-            this.lblCantidad.Name = "lblCantidad";
-            this.lblCantidad.Size = new System.Drawing.Size(101, 26);
-            this.lblCantidad.TabIndex = 19;
-            this.lblCantidad.Text = "Cantidad:";
-            // 
-            // lblPrecio
-            // 
-            this.lblPrecio.AutoSize = true;
-            this.lblPrecio.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPrecio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblPrecio.Location = new System.Drawing.Point(455, 178);
-            this.lblPrecio.Name = "lblPrecio";
-            this.lblPrecio.Size = new System.Drawing.Size(76, 26);
-            this.lblPrecio.TabIndex = 18;
-            this.lblPrecio.Text = "Precio:";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(43, 178);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 26);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Articulo:";
             // 
             // label5
             // 
@@ -302,6 +227,113 @@
             // 
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label1.Location = new System.Drawing.Point(43, 197);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(93, 26);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Articulo:";
+            // 
+            // lblPrecio
+            // 
+            this.lblPrecio.AutoSize = true;
+            this.lblPrecio.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPrecio.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPrecio.Location = new System.Drawing.Point(455, 197);
+            this.lblPrecio.Name = "lblPrecio";
+            this.lblPrecio.Size = new System.Drawing.Size(76, 26);
+            this.lblPrecio.TabIndex = 18;
+            this.lblPrecio.Text = "Precio:";
+            // 
+            // lblCantidad
+            // 
+            this.lblCantidad.AutoSize = true;
+            this.lblCantidad.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCantidad.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblCantidad.Location = new System.Drawing.Point(442, 246);
+            this.lblCantidad.Name = "lblCantidad";
+            this.lblCantidad.Size = new System.Drawing.Size(101, 26);
+            this.lblCantidad.TabIndex = 19;
+            this.lblCantidad.Text = "Cantidad:";
+            // 
+            // lblPresentacion
+            // 
+            this.lblPresentacion.AutoSize = true;
+            this.lblPresentacion.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPresentacion.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblPresentacion.Location = new System.Drawing.Point(43, 284);
+            this.lblPresentacion.Name = "lblPresentacion";
+            this.lblPresentacion.Size = new System.Drawing.Size(139, 26);
+            this.lblPresentacion.TabIndex = 26;
+            this.lblPresentacion.Text = "Presentacion:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label6.Location = new System.Drawing.Point(43, 246);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(83, 26);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Codigo:";
+            // 
+            // txtCodigo
+            // 
+            this.txtCodigo.Location = new System.Drawing.Point(147, 250);
+            this.txtCodigo.Name = "txtCodigo";
+            this.txtCodigo.Size = new System.Drawing.Size(286, 22);
+            this.txtCodigo.TabIndex = 28;
+            // 
+            // cmbArticulo
+            // 
+            this.cmbArticulo.FormattingEnabled = true;
+            this.cmbArticulo.Location = new System.Drawing.Point(147, 200);
+            this.cmbArticulo.Name = "cmbArticulo";
+            this.cmbArticulo.Size = new System.Drawing.Size(286, 24);
+            this.cmbArticulo.TabIndex = 29;
+            this.cmbArticulo.SelectedIndexChanged += new System.EventHandler(this.cmbArticulo_SelectedIndexChanged_1);
+            // 
+            // txtCantidad
+            // 
+            this.txtCantidad.Location = new System.Drawing.Point(549, 246);
+            this.txtCantidad.Name = "txtCantidad";
+            this.txtCantidad.Size = new System.Drawing.Size(100, 22);
+            this.txtCantidad.TabIndex = 30;
+            this.txtCantidad.Text = "1";
+            // 
+            // rdbApagar
+            // 
+            this.rdbApagar.AutoSize = true;
+            this.rdbApagar.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbApagar.Location = new System.Drawing.Point(562, 98);
+            this.rdbApagar.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbApagar.Name = "rdbApagar";
+            this.rdbApagar.Size = new System.Drawing.Size(89, 24);
+            this.rdbApagar.TabIndex = 32;
+            this.rdbApagar.TabStop = true;
+            this.rdbApagar.Text = "Apagar";
+            this.rdbApagar.UseVisualStyleBackColor = true;
+            this.rdbApagar.CheckedChanged += new System.EventHandler(this.rdbApagar_CheckedChanged);
+            // 
+            // rdbEncender
+            // 
+            this.rdbEncender.AutoSize = true;
+            this.rdbEncender.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rdbEncender.Location = new System.Drawing.Point(562, 65);
+            this.rdbEncender.Margin = new System.Windows.Forms.Padding(4);
+            this.rdbEncender.Name = "rdbEncender";
+            this.rdbEncender.Size = new System.Drawing.Size(109, 24);
+            this.rdbEncender.TabIndex = 31;
+            this.rdbEncender.TabStop = true;
+            this.rdbEncender.Text = "Encender";
+            this.rdbEncender.UseVisualStyleBackColor = true;
+            this.rdbEncender.CheckedChanged += new System.EventHandler(this.rdbEncender_CheckedChanged);
+            // 
             // FrmTransaccion
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -340,15 +372,17 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnEliminar;
+        private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.ComboBox cmbArticulo;
+        private System.Windows.Forms.TextBox txtCodigo;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblPresentacion;
         private System.Windows.Forms.Label lblCantidad;
         private System.Windows.Forms.Label lblPrecio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnEliminar;
-        private System.Windows.Forms.Label lblPresentacion;
-        private System.Windows.Forms.TextBox txtCodigo;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.ComboBox cmbArticulo;
-        private System.Windows.Forms.TextBox txtCantidad;
+        private System.Windows.Forms.RadioButton rdbApagar;
+        private System.Windows.Forms.RadioButton rdbEncender;
     }
 }

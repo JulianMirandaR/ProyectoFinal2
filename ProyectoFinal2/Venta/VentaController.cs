@@ -17,13 +17,11 @@ namespace ProyectoFinal2
                 {
                     connection.Open();
 
-                    string query = "INSERT INTO Venta (ventaID, monto, fecha, hora, usuarioID) VALUES (@ventaID, @monto, @fecha, @hora, @usuarioID)";
+                    string query = "INSERT INTO Venta (monto, fecha, usuarioID) VALUES (@monto, @fecha, @usuarioID)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@ventaId", venta.Monto);
                         command.Parameters.AddWithValue("@monto", venta.Monto);
                         command.Parameters.AddWithValue("@fecha", venta.Fecha);
-                        command.Parameters.AddWithValue("@hora", venta.Hora);
                         command.Parameters.AddWithValue("@usuarioID", venta.UsuarioID);
 
                         command.ExecuteNonQuery();
